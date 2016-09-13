@@ -9,14 +9,15 @@
   <link rel="stylesheet" type="text/css" href="./stylesheets/edu.css">
 </head>
 <body>
-<div id="g-edu">
 <!-- 顶部通知条 -->
 <div id="g-note">
+  <div class="m-note">
   <div class="m-note-content">
-    <p>网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！<a href="" title="立即查看">立即查看></a></p>
+    <p>网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！<a href="http://study.163.com/" target="_blank" rel="nofollow" title="网易云课堂">立即查看></a></p>
   </div>
   <div class="m-note-close">
     <span class="closelog"></span><span>不再提醒</span>
+  </div>
   </div>  
 </div>
 <!-- /顶部通知条 -->
@@ -47,30 +48,29 @@
 <!-- /头部信息 -->
 <!-- banner区 -->
 <div id="g-banner">
-  <img src="./images/banner1.jpg" alt="banner">
   <span></span><span></span><span></span>
 </div>
 <!-- /banner区 -->
 <!-- 简介及生活展示区 -->
 <div id="g-info">
   <ul>
-    <li>
-      <div>
-        <span></span>
+    <li class="m-info-l1">
+      <span class="m-info log1"></span>
+      <div class="m-info-content">
         <h1>网易公开课</h1>
         <p>推出国内外名校公开课，涉及广泛的学科，名校老师认真讲解深度剖析，网易视频公开课频道搭建起强有力的网络视频教学平台。</p><a href="http://open.163.com/" target="_blank" rel="nofollow" title="网易公开课">了解更多</a>
       </div>
     </li>
-    <li>
-      <div>
-        <span></span>
+    <li class="m-info-l2">
+      <span class="m-info log2"></span>
+      <div class="m-info-content">
         <h1>云课堂</h1>
         <p>网易旗下大型在线学习平台，该平台面向学习者提供海量免费、优质课程,创新的个性化学习体验，自由开放的交流互动环境。</p><a href="http://study.163.com/" target="_blank" rel="nofollow" title="云课堂">了解更多</a>
       </div>
     </li>
-    <li>
-      <div>
-        <span></span>
+    <li class="m-info-l3">
+      <span class="m-info log3"></span>
+      <div class="m-info-content">
         <h1>中国大学MOOC</h1>
         <p>是爱课程网携手云课堂打造的在线学习平台，每一个有提升愿望的人,都可以在这里学习中国最好的大学课程，学完还能获得认证证书。</p><a href="http://www.icourse163.org/" target="_blank" rel="nofollow" title="中国大学MOOC">了解更多</a>
       </div>
@@ -83,15 +83,15 @@
     <li><img src="./images/gzhj02.jpg" alt="gzhj02"></li>
     <li><img src="./images/gzhj03.jpg" alt="gzhj03"></li>
     <li><img src="./images/gzhj04.jpg" alt="gzhj04"></li>
-    <li><img src="./images/gzhj05.jpg" alt="gzhj05"></li>
+    <li class="m-life-l5"><img src="./images/gzhj05.jpg" alt="gzhj05"></li>
   </ul>
 </div>
 <!-- /简介及生活展示区 -->
 <!-- 内容区 -->
 <div id="g-content">
-  <div>
+  <div class="m-content">
     <header>
-      <h1>产品设计</h1><h1>编程语言</h1>
+      <h1 class="m-content-des">产品设计</h1><h1 class="m-content-lan">编程语言</h1>
     </header>
     <!-- 详细课程内容 -->
     <div>
@@ -117,10 +117,12 @@
   <aside>
     <div>
       <h1>机构介绍</h1>
-      <p>观看下面的视频来了解吧：</p>
-      <img src="./images/video.jpg" alt="video">
+      <div class="m-content-video">
+        <p>观看下面的视频来了解吧：</p>
+        <img src="./images/video.jpg" alt="video">
+      </div>
     </div>
-    <div>
+    <div class="m-content-hot">
       <h1>最热排行</h1>
       <!-- 实时排行 -->
       <div>
@@ -136,38 +138,40 @@
     </div>
   </aside>
 </div>
+<div class="clearfix"></div>
 <!-- /内容区 -->
 <!-- 底部信息 -->
 <footer id="g-foot">
-  <div>
-    <h1>EDU<span></span>网易教育产品部</h1>
-    <p>©2014 icourse163.org 浙ICP备08114786号-1<br>icourses.cn 京ICP备12020869号-2 京公网安备110102000459-2</p>
+  <div class="m-foot">
+    <div>
+      <h1><span></span>网易教育产品部</h1>
+      <p>©2014 icourse163.org 浙ICP备08114786号-1<br>icourses.cn 京ICP备12020869号-2 京公网安备110102000459-2</p>
+    </div>
+    <!-- 此处table仅用作布局 -->
+    <table>
+      <thead>
+        <tr><th><h3>友情链接：</h3></th><th><h3>我们：</h3></th>
+        <th><h3>更多：</h3></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="http://open.163.com/" target="_blank" rel="nofollow" title="网易公开课">网易公开课</a></td>
+          <td><a href="" title="关于我们">关于</a></td>
+          <td><a href="" title="常见问题"><a>常见问题</a></td>
+        </tr>
+        <tr>
+          <td><a href="http://study.163.com/" target="_blank" rel="nofollow" title="网易云课堂">网易云课堂</a></td>
+          <td><a href="" title="联系我们">联系</a></td>
+          <td><a href="" title="意见反馈">意见反馈</a></td>
+        </tr>
+        <tr>
+          <td><a href="http://www.icourse163.org/" target="_blank" rel="nofollow" title="中国大学MOOC">中国大学MOOC</a></td>
+          <td><a href="" title="关注我们">关注</a><span class="m-foot-log"></span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <!-- 此处table仅用作布局 -->
-  <table>
-    <thead>
-      <tr><th><h3>友情链接：</h3></th><th><h3>我们：</h3></th>
-      <th><h3>更多：</h3></th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a href="http://open.163.com/" target="_blank" rel="nofollow" title="网易公开课">网易公开课</a></td>
-        <td><a href="" title="关于我们">关于</a></td>
-        <td><a href="" title="常见问题"><a>常见问题</a></td>
-      </tr>
-      <tr>
-        <td><a href="http://study.163.com/" target="_blank" rel="nofollow" title="网易云课堂">网易云课堂</a></td>
-        <td><a href="" title="联系我们">联系</a></td>
-        <td><a href="" title="意见反馈">意见反馈</a></td>
-      </tr>
-      <tr>
-        <td><a href="http://www.icourse163.org/" target="_blank" rel="nofollow" title="中国大学MOOC">中国大学MOOC</a></td>
-        <td><a href="" title="关注我们">关注</a><span></span></td>
-      </tr>
-    </tbody>
-  </table>
 </footer>
 <!-- /底部信息 -->
-</div>
 </body>
 </html>
