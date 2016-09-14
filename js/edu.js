@@ -58,7 +58,7 @@ if (gnotecookie.shownote==1) {
     if (secure)
         cookie += '; secure=' + secure;
     document.cookie = cookie;
-})(shownote,1,)
+})(shownote,1)
 }
 var closenote=getElementsByClassName(elenote,'m-note-close');
 function closent (ele){
