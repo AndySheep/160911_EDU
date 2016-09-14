@@ -24,6 +24,7 @@ body{
 }
 #g-note .m-note-close{
 	float: right;
+	cursor: pointer;
 }
 #g-note{
 	height: 36px;
@@ -42,6 +43,9 @@ body{
 	width: 9px;
 	height: 9px;
 	background: url(../images/sprites.png) -60px -260px;
+}
+.closenote{
+	display:none;
 }
 /* /顶部通知条 */
 /* 头部信息 */
