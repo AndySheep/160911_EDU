@@ -1,24 +1,56 @@
+//兼容浏览器的监听事件
 function addEvent(node,event,handler){
     if (!!node.addEventListener){
         node.addEventListener(event,handler,!1);
     }else{
         node.attachEvent('on'+event,handler);
     }
-}//兼容浏览器的监听事件
+}
+//设置cookie
+function setCookie(name, value, expires, path, domain, secure) {
+    var cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+    if (expires)
+        cookie += '; expires=' + expires.toGMTString();
+    if (path)
+        cookie += '; path=' + path;
+    if (domain)
+        cookie += '; domain=' + domain;
+    if (secure)
+        cookie += '; secure=' + secure;
+    document.cookie = cookie;
+}
+//获取cookie
+function getcookie () {
+    var cookie = {};
+    var all = document.cookie;
+    if (all === '')
+        return cookie;
+    var list = all.split('; ');
+    for (var i = 0; i < list.length; i++) {
+        var item = list[i];
+        var p = item.indexOf('=');
+        var name = item.substring(0, p);
+        name = decodeURIComponent(name);
+        var value = item.substring(p + 1);
+        value = decodeURIComponent(value);
+        cookie[name] = value;
+    }
+    return cookie;
+}
+//兼容getElementsByClassName
 function getElementsByClassName(element,names) {
 	if (element.getElementsByClassName) {
-		return element.getElementsByClassName(names);//特性侦测，优先使用W3C规范
+		return element.getElementsByClassName(names);
 	}else{
-		var elements=element.getElementsByTagName('*'),//获取所有的后代元素
-			result=[];//建立空数组集合，用来存放识别到的符合要求的元素
+		var elements=element.getElementsByTagName('*'),result=[];
 		for (var i = 0,ele,len=elements.length;ele=elements[i],i<len ;i++) {
 			if (hasClassName(ele,names)) {
 				result.push(ele);
 			}
-		}//遍历所有的后代元素，如果有符合类名的元素则将它压入result中
+		}
 		function hasClassName(elementorg,nameorg) {
-			var attrorg=elementorg.getAttribute('class');//获取具有class样式属性值
-			var attrname=nameorg.split(' ');//获取识别元素的集合
+			var attrorg=elementorg.getAttribute('class');
+			var attrname=nameorg.split(' ');
 			for (var i = 0,len=attrname.length; i < len; i++) {
 				if (attrorg.indexOf(attrname[i])) {
 					continue;
@@ -26,7 +58,7 @@ function getElementsByClassName(element,names) {
 					return false;
 				}
 			}
-			return true;//判断是否具有该名称属性
+			return true;
 		}
 		return result;
 	}

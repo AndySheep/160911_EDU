@@ -1,7 +1,4 @@
 /* 主体居中设置 */
-body{
-	/*overflow-x: hidden;*/
-}
 #g-note,#g-head,#g-content,#g-foot{
 	text-align: center;
 }
@@ -28,7 +25,7 @@ body{
 }
 #g-note{
 	height: 36px;
-	font: 12px/36px "微软雅黑";
+	font: 12px/36px "Microsoft YaHei","微软雅黑";
 	vertical-align: center;
 	color: #333;
 	background-color: #f3f3f3;
@@ -66,7 +63,7 @@ body{
 	float: right;
 }
 #g-head .m-header div h1{
-	font: 22px/22px "微软雅黑"; 
+	font: 22px/22px "Microsoft YaHei","微软雅黑";
 	color: #333;
 }
 #g-head .m-header div h1 span{
@@ -79,12 +76,13 @@ body{
 	width: 54px;
 	height: 22px;
 	margin-left: 30px;
-	font: 12px/22px "宋体";
+	font: 12px/22px "SimSun","宋体";
 	vertical-align: text-bottom;
 	text-align: center;
 	color: #fff;
 	background-color: #21a557;
 	border-radius: 2px;
+	cursor: pointer;
 }
 #g-head .m-head-login:hover{
 	background-color: #2fb556;
@@ -99,17 +97,22 @@ body{
 #g-head .m-head-fan{
 	height: 22px;
 	margin-left: 14px;
-	font: 12px/22px "宋体";
+	font: 12px/22px "SimSun","宋体";
 	vertical-align: text-bottom;
 	color: #666;
 }
+/* 登录 */
+#m-loginForm{
+	display: 
+}
+/* /登录 */
 /* 头部导航 */
 #g-head .m-head-nav ul{
 	font-size: 0;
 }
 #g-head .m-head-nav ul>li{
 	height: 22px;
-	font: 16px/22px "微软雅黑";
+	font: 16px/22px "Microsoft YaHei","微软雅黑";
 	vertical-align: text-bottom;
 }
 #g-head .m-head-nav ul li a:hover{
@@ -135,8 +138,15 @@ body{
 /* /头部信息 */
 /* banner区 */
 #g-banner{
+	position: relative;
+	height: 460px;
+}
+.m-banner{
+	position: absolute;
+	left: 50%;
 	width: 1652px;
 	height: 460px;
+	margin-left: -826px;
 	line-height: 0;
 	background: url(../images/banner1.jpg) 50% 50%;
 }
@@ -189,18 +199,18 @@ body{
 }
 #g-info ul h1{
 	display: inline-block;
-	font: 22px/22px "微软雅黑";
+	font: 22px/22px "Microsoft YaHei","微软雅黑";
 	color: #333;
 }
 #g-info ul p{
 	display: inline-block;
 	padding: 14px 0 28px 0;
-	font: 14px/24px "微软雅黑";
+	font: 14px/24px "Microsoft YaHei","微软雅黑";
 	color: #666;
 }
 #g-info ul a{
 	display: inline-block;
-	font: 14px/14px "微软雅黑";
+	font: 14px/14px "Microsoft YaHei","微软雅黑";
 	color: #39a030;
 }
 #g-info ul a:hover{
@@ -210,8 +220,14 @@ body{
 /* 生活展示区 */
 #g-life{
 	font-size: 0;
+	position: relative;
+	height: 320px;
+}
+#g-life ul{
+	position: absolute;
+	left: 50%;
 	width: 1616px;
-	overflow: hidden;
+	margin-left: -808px;
 }
 #g-life ul li{
 	display: inline-block;
@@ -251,7 +267,7 @@ body{
 	display: inline-block;
 	width: 200px;
 	height: 50px;
-	font: 20px/50px "微软雅黑";
+	font: 20px/50px "Microsoft YaHei","微软雅黑";
 	text-align: center;
 	vertical-align: middle;
 }
@@ -272,7 +288,7 @@ body{
 	border-width:0 1px 1px 1px;
 	border-style: solid;
 	border-color: #ecebeb;
-	font: 16px/58px "微软雅黑";
+	font: 16px/58px "Microsoft YaHei","微软雅黑";
 	text-align: left;
 	vertical-align: middle;
 	text-indent: 20px;
@@ -288,7 +304,7 @@ body{
 	top: 22px;
 	left: 23px;
 	height: 14px;
-	font: 14px/14px "微软雅黑";
+	font: 14px/14px "Microsoft YaHei","微软雅黑";
 	text-align: left;
 	vertical-align: middle;
 	color: #666;
@@ -300,7 +316,7 @@ body{
 }
 #g-content .m-content-aside .m-content-hot h1{
 	margin-top: 20px;
-	font: 16px/55px "微软雅黑";
+	font: 16px/55px "Microsoft YaHei","微软雅黑";
 	color: #333;
 }
 #g-content .m-content-aside .m-content-hot div{
@@ -331,7 +347,7 @@ body{
 	position: absolute;
 	top: 134px;
 	left: 50px;
-	font: 12.5px/25px "微软雅黑";
+	font: 12.5px/25px "Microsoft YaHei","微软雅黑";
 	text-align: left;
 	color: #bebfc0;
 }
@@ -342,7 +358,7 @@ body{
 	background: url(../images/sprites.png) 0 -320px no-repeat;
 }
 #g-foot div h1{
-	font: 22px/22px "微软雅黑"; 
+	font: 22px/22px "Microsoft YaHei","微软雅黑"; 
 	color: #39a030;
 }
 #g-foot table{
@@ -355,12 +371,12 @@ body{
 	vertical-align: super;
 }
 #g-foot table thead{
-	font: 12px/12px "微软雅黑"; 
+	font: 12px/12px "Microsoft YaHei","微软雅黑"; 
 	color: #bebfc0;
 }
 
 #g-foot table tbody tr a{
-	font: 14px/14px "微软雅黑"; 
+	font: 14px/14px "Microsoft YaHei","微软雅黑"; 
 	color: #bebfc0;
 }
 #g-foot table tbody tr a:hover{
