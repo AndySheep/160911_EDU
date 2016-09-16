@@ -7,6 +7,7 @@
     <meta name="description" content="网易教育产品部结合网易公开课、网易云课堂以及中国大学MOOC向广大互联网学习爱好者提供一个优秀的学习平台">
     <link rel="stylesheet" type="text/css" href="./stylesheets/reset.css">
     <link rel="stylesheet" type="text/css" href="./stylesheets/edu.css">
+    <script type="text/javascript" src="./js/md5.js"></script>
 </head>
 <body>
 <!-- 顶部通知条 -->
@@ -27,6 +28,7 @@
         <div>
             <h1><span></span>网易教育产品部</h1>
             <em class="m-head-login" id="m-head-login"><span></span>关注</em>
+            <em class="m-head-loginok" id="m-head-loginok"><span class="m-loginok-log"></span>已关注 <span>|</span><strong class="m-head-loginno" id="m-head-loginno"> 取消</strong></em>
             <span class="m-head-fan">粉丝 45</span>
         </div>
         <!-- 头部导航 -->
@@ -47,22 +49,26 @@
         <!-- /头部导航 -->
     </div>
     <!-- 登录 -->
-    <div>
-        <form id="m-loginForm" action="/login">
+    <div id="g-loginForm">
+        <div id="m-close-login" class="m-close-login"></div>
+        <form id="m-loginForm" action="" name="loginForm">
             <legend>登录网易云课堂</legend>
             <fieldset>
-                <div>
-                    <input id="mobile" name="mobile" type="text">
+                <div class="m-acpa">
+                    <label for="m-account">账号</label>
+                    <input id="m-account" name="account" type="text">
+                </div>
+                <div class="m-acpa">
+                    <label for="m-password">密码</label>
+                    <input id="m-password" type="password" name="password">
                 </div>
                 <div>
-                    <input id="password" type="password" name="password">
-                </div>
-                <div>
-                    <button id="login">登　录</button>
+                    <button id="m-login-button" type="submit">登录</button>
                 </div>
             </fieldset>
         </form>
     </div>
+    <div id="g-mask"></div>
     <!-- /登录 -->
 </div>
 <!-- /头部信息 -->

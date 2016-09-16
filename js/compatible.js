@@ -37,6 +37,10 @@ function getcookie () {
     }
     return cookie;
 }
+//删除cookie
+function removeCookie (name, path, domain) {
+    document.cookie = name + '=' + '; path=' + path + '; domain=' + domain + '; max-age=0';
+}
 //兼容getElementsByClassName
 function getElementsByClassName(element,names) {
 	if (element.getElementsByClassName) {
@@ -62,4 +66,33 @@ function getElementsByClassName(element,names) {
 		}
 		return result;
 	}
+}
+//封装Ajax请求参数序列化
+function serialize (data) {
+    if (!data) return '';
+    var pairs = [];
+    for (var name in data){
+        if (!data.hasOwnProperty(name)) continue;
+        if (typeof data[name] === 'function') continue;
+        var value = data[name].toString();
+        name = encodeURIComponent(name);
+        value = encodeURIComponent(value);
+        pairs.push(name + '=' + value);
+    }
+    return pairs.join('&');
+}
+//封装Ajax的GET请求方法
+function get(url,options,callback){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function (){
+        if (xhr.readyState == 4) {
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                 callback(xhr.responseText);
+            } else {
+                console.log("Ajax request failed : " + xhr.status);
+            }
+        }
+    };
+    xhr.open("get",url + "?" + serialize(options),true);
+    xhr.send(null);
 }

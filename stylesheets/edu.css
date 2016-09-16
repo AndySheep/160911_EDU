@@ -7,6 +7,12 @@
 	width: 1206px;
 	margin: 0 auto;
 }
+.close{
+	display:none;
+}
+.show{
+	display:inline-block;
+}
 /* /主体居中及各区域浮动设置 */
 /* 顶部通知条 */
 #g-note .m-note-content,#g-note .m-note-close{
@@ -41,12 +47,9 @@
 	height: 9px;
 	background: url(../images/sprites.png) -60px -260px;
 }
-.closenote{
-	display:none;
-}
 /* /顶部通知条 */
 /* 头部信息 */
-#g-head .m-header,#g-head .m-header div h1,#g-head .m-header div span,#g-head .m-header div em,#g-head .m-head-nav ul li{
+#g-head .m-header,#g-head .m-header div h1,#g-head .m-header div span,#g-head .m-head-nav ul li{
 	display: inline-block;
 }
 #g-head{
@@ -72,7 +75,7 @@
 	vertical-align: text-bottom;
 	background: url(../images/sprites.png) 0 -300px no-repeat;
 }
-#g-head .m-head-login{
+#g-head #m-head-login{
 	width: 54px;
 	height: 22px;
 	margin-left: 30px;
@@ -84,10 +87,10 @@
 	border-radius: 2px;
 	cursor: pointer;
 }
-#g-head .m-head-login:hover{
+#g-head #m-head-login:hover{
 	background-color: #2fb556;
 }
-#g-head .m-head-login span{
+#g-head #m-head-login span{
 	width: 8px;
 	height: 8px;
 	margin-right: 5px;
@@ -101,9 +104,112 @@
 	vertical-align: text-bottom;
 	color: #666;
 }
+/* 已关注 */
+#g-head #m-head-loginok{
+	width: 106px;
+	height: 21px;
+	margin-left: 30px;
+	vertical-align: text-bottom;
+	text-align: center;
+	font: 12px/21px "SimSun","宋体";
+	color: #333;
+	border: 1px solid #efefef;
+}
+#g-head #m-head-loginok .m-loginok-log{
+	width: 11px;
+	height: 9px;
+	margin-right: 5px;
+	background: url(../images/sprites.png) -20px -240px no-repeat;
+}
+#g-head #m-head-loginok span{
+	color: #ccc;
+}
+#g-head #m-head-loginok strong{
+	cursor: pointer;
+	color: #999;
+}
+#g-head #m-head-loginok strong:hover{
+	color: #21a557;
+	text-decoration: underline;
+}
+/* /已关注 */
 /* 登录 */
+#g-loginForm{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 387px;
+	height: 288px;
+	margin: -144px 0 0 -193.5px;
+	z-index: 199;
+	background-color: #fff;
+}
+#g-loginForm .m-close-login{
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	right: 8px;
+	width: 10px;
+	height: 10px;
+	background: url(../images/sprites.png) -40px -260px no-repeat;
+}
 #m-loginForm{
-	display: 
+	position: absolute;
+	top: 30px;
+	left: 40px;
+}
+#m-loginForm legend{
+	font: 18px/18px "Microsoft YaHei","微软雅黑";
+	color: #444;
+}
+#m-loginForm fieldset{
+	margin-top: 20px;
+}
+#m-loginForm fieldset .m-acpa{
+	position: relative;
+	width: 295px;
+	height: 45px;
+	margin-bottom: 15px;
+}
+#m-password,#m-account{
+	font: 16px/16px "Microsoft YaHei","微软雅黑";
+}
+#m-loginForm fieldset .m-acpa input{
+	width: 295px;
+	height: 45px;
+	border: 1px solid #dfdfdf;
+	background-color: #fafafa;
+	box-shadow: inset 0 1px 1px 0px #f1f1f1;
+}
+#m-loginForm fieldset .m-acpa label{
+	position: absolute;
+	top: 16px;
+	left: 12px;
+	z-index: 1;
+	font: 16px/16px "Microsoft YaHei","微软雅黑";
+	color: #ccc;
+}
+#m-loginForm #m-login-button{
+	width: 295px;
+	height: 48px;
+	margin-top: 14px;
+	font: 16px/16px "Microsoft YaHei","微软雅黑";
+	color: #fff;
+	background: url(../images/login.png);
+}
+#g-mask{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(50,50,50,0.8);
+	/* 兼容ie8透明度 */
+	background:#000000\9;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+	z-index: 99;
 }
 /* /登录 */
 /* 头部导航 */
@@ -355,7 +461,7 @@
 	width: 80px;
 	height: 22px;
 	vertical-align: text-bottom;
-	background: url(../images/sprites.png) 0 -320px no-repeat;
+	background: url(../images/sprites.png) 0 -330px no-repeat;
 }
 #g-foot div h1{
 	font: 22px/22px "Microsoft YaHei","微软雅黑"; 
