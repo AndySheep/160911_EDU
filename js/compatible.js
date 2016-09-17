@@ -96,3 +96,11 @@ function get(url,options,callback){
     xhr.open("get",url + "?" + serialize(options),true);
     xhr.send(null);
 }
+//兼容preventDefault
+function preventDefault(event){
+    if(event&&event.preventDefault){
+        return event.preventDefault();
+    }else{
+        return window.event.returnValue=false;
+    }
+}

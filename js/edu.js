@@ -11,10 +11,10 @@ function gEBCN(ele,name){
 //获取cookie、设置展示和关闭函数，以供各模块使用
 var cookie=getcookie();
 function close(ele) {
-	return ele.className='close';
+	return ele.style.display='none';
 }
 function show(ele) {
-	return ele.className='show';
+	return ele.style.display='inline-block';
 }
 /* 顶部通知条 */
 //获取通知条节点
@@ -44,6 +44,8 @@ var login=gEBId('m-head-login');
 var loginshow=gEBId('g-loginForm');
 //获取登录框的关闭按钮节点
 var loginclose=gEBId('m-close-login');
+//获取登录框信息提示节点
+var loginshmsg=gEBId('m-loginshmsg');
 //获取首页已关注按钮节点
 var loginok=gEBId('m-head-loginok');
 //获取首页取消关注按钮节点
@@ -77,45 +79,51 @@ if (cookie.loginSuc=='yes') {
 }
 //监听输入事件，聚焦和有输入内容时隐藏提示文字，失焦并且无输入内容时显示提示文字
 addEvent(inputac,'focus',function (event) {
-	inputtip[0].style.display='none';
+	close(inputtip[0]);
 });
 addEvent(inputac,'blur',function (event) {
 	if (inputac.value=='') {
-		inputtip[0].style.display='inline-block';
+		show(inputtip[0]);
 	}
 });
 addEvent(inputpa,'focus',function (event) {
-	inputtip[1].style.display='none';
+	close(inputtip[1]);
 });
 addEvent(inputpa,'blur',function (event) {
 	if (inputac.value=='') {
-		inputtip[1].style.display='inline-block';
+		show(inputtip[1]);
 	}
 });
-/* 监听登录点击事件，点击登录后调用Ajax获取登录是否成功信息并予以反馈到窗口的显示状态 */
+/* 监听登录按钮点击事件，点击登录后先验证表单，通过后调用Ajax登录，登录成功则返回首页，否则显示错误状态 */
 gEBId('m-login-button').onclick=function(){
 	addEvent(form,'submit',function(event){
 		event.preventDefault();
-	});
-	//md5加密处理信息，调用Ajax的GET方法向服务器发送请求，若成功则退出弹窗，修改关注状态为已关注，设置相关cookie
-	var usernamemd5=hex_md5(String(inputac.value));
-	var passwordmd5=hex_md5(String(inputpa.value));
-	get('http://study.163.com/webDev/login.htm',{userName:usernamemd5,password:passwordmd5},function (a) {
-		if (a==='1') {
-			setCookie('loginSuc','yes');
-			close(loginshow);
-			close(mask);
-			get('http://study.163.com/webDev/ attention.htm','',function (b) {
-				if (b==='1') {
-					setCookie('followSuc','yes');
-					close(login);
-					show(loginok);
-				}else{
-					alert('关注cookie设置失败！');
-				}
-			});
+		//验证账号和密码
+		if(!(/studyOnline/.test(inputac.value)&&/study.163.com/.test(inputpa.value))){
+				show(loginshmsg);
+				form.reset();
 		}else{
-			alert('您的账号和密码错误，请重新输入！');
+				//md5加密处理信息，调用Ajax的GET方法向服务器发送请求，若成功则退出弹窗，修改关注状态为已关注，设置相关cookie
+				var usernamemd5=hex_md5(String(inputac.value));
+				var passwordmd5=hex_md5(String(inputpa.value));
+				get('http://study.163.com/webDev/login.htm',{userName:usernamemd5,password:passwordmd5},function (a) {
+					if (a==='1') {
+						setCookie('loginSuc','yes');
+						close(loginshow);
+						close(mask);
+						get('http://study.163.com/webDev/ attention.htm','',function (b) {
+							if (b==='1') {
+								setCookie('followSuc','yes');
+								close(login);
+								show(loginok);
+							}else{
+								alert('关注cookie设置失败！');
+							}
+						});
+					}else{
+						alert('Ajax通信失败！');
+					}
+				});
 		}
 	});
 };
@@ -125,4 +133,12 @@ loginno.onclick=function(){
 	show(login);
 	removeCookie('loginSuc');
 };
+addEvent(login,'click',function(event){
+	show(loginshow);
+	show(mask);
+	addEvent(loginclose,'click',function(event){
+		close(loginshow);
+		close(mask);
+	});
+});
 /* /头部信息 */
