@@ -1,5 +1,8 @@
 /* 主体居中设置 */
-#g-note,#g-head,#g-content,#g-foot{
+body{
+	min-width: 1206px;
+}
+#g-note,#g-head,#g-banner,#g-content,#g-foot{
 	text-align: center;
 }
 #g-info ul{
@@ -161,7 +164,8 @@
 	top: 30px;
 	left: 40px;
 }
-#m-loginForm legend{
+#m-loginForm .m-loginForm-title{
+	text-align: left;
 	font: 18px/18px "Microsoft YaHei","微软雅黑";
 	color: #444;
 }
@@ -174,15 +178,13 @@
 	height: 45px;
 	margin-bottom: 15px;
 }
-#m-password,#m-account{
-	font: 16px/16px "Microsoft YaHei","微软雅黑";
-}
 #m-loginForm fieldset .m-acpa input{
 	width: 295px;
 	height: 45px;
 	border: 1px solid #dfdfdf;
 	background-color: #fafafa;
 	box-shadow: inset 0 1px 1px 0px #f1f1f1;
+	font: 16px/45px "Microsoft YaHei","微软雅黑";
 }
 #m-loginForm fieldset .m-acpa label{
 	position: absolute;
@@ -249,16 +251,48 @@
 /* banner区 */
 #g-banner{
 	position: relative;
-	height: 460px;
+	line-height: 0;
+	font-size: 0;
 }
-.m-banner{
-	position: absolute;
-	left: 50%;
+#g-banner .m-banner-box ul li,#g-banner .m-banner-box ul li a,#g-banner .m-banner-box ul li a img{
+	display: inline-block;
+}
+#g-banner .m-banner-box ul{
+	display: inline-block;
 	width: 1652px;
 	height: 460px;
+	overflow-x: hidden;
+}
+#g-banner .m-banner-box ul li{
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 1652px;
 	margin-left: -826px;
-	line-height: 0;
-	background: url(../images/banner1.jpg) 50% 50%;
+}
+#g-banner .m-banner-bar{
+	display: inline-block;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	width: 63px;
+	height: 10px;
+	margin-left: -31.5px;
+	z-index: 19;
+}
+#g-banner .m-banner-bar span{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0 5.5px;
+	border-radius: 5px;
+	background-color: #fff;
+}
+.m-img-active{
+	z-index: 9;
+}
+#g-banner .m-banner-bar .m-bar-active{
+	background-color: #333;
 }
 /* /banner区 */
 /* 简介 */

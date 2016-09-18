@@ -1,21 +1,3 @@
-//简化获取元素节点
-function gEBId(ele){
-	return document.getElementById(ele);
-}
-function gEBTN(ele,name) {
-	return ele.getElementsByTagName(name);
-}
-function gEBCN(ele,name){
-	return getElementsByClassName(ele,name);
-}
-//获取cookie、设置展示和关闭函数，以供各模块使用
-var cookie=getcookie();
-function close(ele) {
-	return ele.style.display='none';
-}
-function show(ele) {
-	return ele.style.display='inline-block';
-}
 /* 顶部通知条 */
 //获取通知条节点
 var note=gEBId('g-note');
@@ -24,7 +6,7 @@ var closenote=gEBId('m-note-close');
 //定义通知条cookie的名称
 var shownote='shownote';
 /* 优先判断是否含有shownote这个cookie，若有则直接关闭通知，若无则监听点击事件，监听到点击事件后先设置cookie，然后关闭通知。 */
-if (cookie.shownote=='yes') {
+if (cookies.shownote=='yes') {
 	close(note);
 }else{
 	addEvent(closenote,'click',function(event){
@@ -58,11 +40,8 @@ var inputac=gEBId('m-account');
 var inputpa=gEBId('m-password');
 //获取账号和密码输入框的两个提示节点
 var inputtip=gEBTN(form,'label');
-//先关闭登录窗口和遮罩
-close(loginshow);
-close(mask);
 /* 首先判断是否已设置登录cookie，若已设置，则将关注设置为已关注状态，否则显示关注状态并监听关注按钮的点击事件 */
-if (cookie.loginSuc=='yes') {
+if (cookies.loginSuc=='yes') {
 	close(login);
 	show(loginok);
 }else{
@@ -97,33 +76,33 @@ addEvent(inputpa,'blur',function (event) {
 /* 监听登录按钮点击事件，点击登录后先验证表单，通过后调用Ajax登录，登录成功则返回首页，否则显示错误状态 */
 gEBId('m-login-button').onclick=function(){
 	addEvent(form,'submit',function(event){
-		event.preventDefault();
-		//验证账号和密码
+		preventDefault(event);
+		//验证账号和密码,未通过验证则显示提示信息并重置表单
 		if(!(/studyOnline/.test(inputac.value)&&/study.163.com/.test(inputpa.value))){
-				show(loginshmsg);
-				form.reset();
+			show(loginshmsg);
+			form.reset();
 		}else{
-				//md5加密处理信息，调用Ajax的GET方法向服务器发送请求，若成功则退出弹窗，修改关注状态为已关注，设置相关cookie
-				var usernamemd5=hex_md5(String(inputac.value));
-				var passwordmd5=hex_md5(String(inputpa.value));
-				get('http://study.163.com/webDev/login.htm',{userName:usernamemd5,password:passwordmd5},function (a) {
-					if (a==='1') {
-						setCookie('loginSuc','yes');
-						close(loginshow);
-						close(mask);
-						get('http://study.163.com/webDev/ attention.htm','',function (b) {
-							if (b==='1') {
-								setCookie('followSuc','yes');
-								close(login);
-								show(loginok);
-							}else{
-								alert('关注cookie设置失败！');
-							}
-						});
-					}else{
-						alert('Ajax通信失败！');
-					}
-				});
+			//md5加密处理信息，调用Ajax的GET方法向服务器发送请求，若成功则退出登录弹窗，修改关注状态为已关注，设置相关cookie
+			var usernamemd5=hex_md5(String(inputac.value));
+			var passwordmd5=hex_md5(String(inputpa.value));
+			get('http://study.163.com/webDev/login.htm',{userName:usernamemd5,password:passwordmd5},function (a) {
+				if (a==='1') {
+					setCookie('loginSuc','yes');
+					close(loginshow);
+					close(mask);
+					get('http://study.163.com/webDev/ attention.htm','',function (b) {
+						if (b==='1') {
+							setCookie('followSuc','yes');
+							close(login);
+							show(loginok);
+						}else{
+							alert('关注cookie设置失败！');
+						}
+					});
+				}else{
+					alert('Ajax通信失败！');
+				}
+			});
 		}
 	});
 };
@@ -131,7 +110,7 @@ gEBId('m-login-button').onclick=function(){
 loginno.onclick=function(){
 	close(loginok);
 	show(login);
-	removeCookie('loginSuc');
+	setCookie('loginSuc','no');
 };
 addEvent(login,'click',function(event){
 	show(loginshow);
@@ -142,3 +121,58 @@ addEvent(login,'click',function(event){
 	});
 });
 /* /头部信息 */
+/* banner区(代码逻辑结合慕课网及北京章鱼实现) */
+//获取轮播图片、按钮的节点
+var bannerImg=gEBId('m-banner-list');
+var bannerImgLi=gEBTN(bannerImg,'li');
+var bannerBarLi=gEBId('m-banner-bar').getElementsByTagName('span');
+var banner=gEBId('g-banner');
+//初始化一个now用于存储轮播状态
+var now=0;
+//监听按钮点击事件，点击后调用切换函数
+for (var i = 0, len=bannerBarLi.length; i < len; i++){
+	bannerBarLi[i].index=i;
+	bannerBarLi[i].onclick=function(){
+		now=this.index;
+		bannerTab();
+	};
+}
+//切换函数，先清空所有按钮和轮播图的显示状态，然后给now状态的按钮及轮播图添加显示样式并调用fadein淡入函数
+function bannerTab() {
+	//控制bannerBarLi的className
+	for(var i=0,ilen=bannerBarLi.length;i<ilen;i++){
+		bannerBarLi[i].className = '';
+	}
+	bannerBarLi[now].className = 'm-bar-active';
+
+	//控制bannerImgLi的className
+	for(var j=0,jlen=bannerImgLi.length;j<jlen;j++){
+		bannerImgLi[j].className = '';
+		//把其他li的opacity设置0
+		bannerImgLi[j].style.opacity = 0;
+		bannerImgLi[j].style.filter='alpha(opacity='+0+')';
+	}
+	bannerImgLi[now].className = 'm-img-active';
+	//淡入调用，传入需要淡入的节点及淡入过程的时间，单位‘ms’
+	fadein(bannerImgLi[now], 500);
+}
+//自动轮播函数
+function next() {
+	now++;
+	//判断bannerBarLi目前的位置，播到最后一张时将now归零
+	if(now == bannerBarLi.length) {
+		now = 0;
+	}
+	bannerTab();
+}
+//计时器
+var teimr = setInterval(next,5000);
+//鼠标移入清除计时器
+banner.onmouseover = function() {
+		clearInterval(teimr);
+	};
+	//鼠标离开从启计时器
+banner.onmouseout = function() {
+	teimr = setInterval(next,5000);
+};
+/* /banner区 */

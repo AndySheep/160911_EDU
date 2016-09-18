@@ -1,3 +1,21 @@
+//简化获取元素节点
+function gEBId(ele){
+    return document.getElementById(ele);
+}
+function gEBTN(ele,name) {
+    return ele.getElementsByTagName(name);
+}
+function gEBCN(ele,name){
+    return getElementsByClassName(ele,name);
+}
+//获取cookie、设置展示和关闭函数，以供各模块使用
+var cookies=getcookie();
+function close(ele) {
+    return ele.style.display='none';
+}
+function show(ele) {
+    return ele.style.display='inline-block';
+}
 //兼容浏览器的监听事件
 function addEvent(node,event,handler){
     if (!!node.addEventListener){
@@ -103,4 +121,30 @@ function preventDefault(event){
     }else{
         return window.event.returnValue=false;
     }
+}
+//兼容ie8版本的淡入动画
+function fadein(ele,time) {
+    var distance1=1,distance2=100;
+    var stepLength1=distance1/100;
+    var stepLength2=distance2/100;
+    var offset1=0,offset2=0;
+    //获取每隔多少秒触发的时间长度，触发100次，乘积就是动画时间time长度
+    var timeact=parseInt(time)/100;
+    var step=function(){
+        var tmpOffset1=offset1+stepLength1,tmpOffset2=offset2+stepLength2;
+        if ((tmpOffset1<=1)&&(tmpOffset2<=100)) {
+            ele.style.opacity=tmpOffset1;
+            offset1=tmpOffset1;
+            ele.style.filter='alpha(opacity='+tmpOffset2+')';
+            offset2=tmpOffset2;
+        } else {
+            ele.style.opacity=tmpOffset1;
+            ele.style.filter='alpha(opacity='+tmpOffset2+')';
+            clearInterval(intervalID);
+        }
+    };
+    //初始化元素的透明度为0，兼容IE8
+    ele.style.opacity=0;
+    ele.style.filter='alpha(opacity='+0+')';
+    var intervalID=setInterval(step,timeact);
 }
