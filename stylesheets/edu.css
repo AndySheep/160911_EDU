@@ -365,7 +365,7 @@ body{
 #g-life{
 	font-size: 0;
 	position: relative;
-	height: 320px;
+	height: 220px;
 }
 #g-life ul{
 	position: absolute;
@@ -385,20 +385,14 @@ body{
 #g-content{
 	display: table;
 	width: 1206px;
+	height: 1350px;
 	margin: 81px auto 120px;
+	font-size: 0;
 }
-/* 清除浮动 */
-.clearfix{
-	content: '.';
-	display: block;
-	clear: both;height: 0;
-	overflow: hidden;
-	visibility: hidden;
+#g-content .m-content{
+	width: 981px;
+	height: 1350px;
 }
-.clearfix{
-	zoom: 1;
-}
-/* /清除浮动 */
 #g-content>div{
 	display: inline-block;
 	float: left;
@@ -407,6 +401,12 @@ body{
 	display: inline-block;
 	float: right;
 }
+#g-content .m-content-header{
+	width: 400px;
+	color: #666;
+	background-color: #fff;
+	box-shadow: -1px 1px 2px 0px #d4d3d3,1px 0px 2px 0px #d4d3d3;
+}
 #g-content .m-content-header h1{
 	display: inline-block;
 	width: 200px;
@@ -414,17 +414,133 @@ body{
 	font: 20px/50px "Microsoft YaHei","微软雅黑";
 	text-align: center;
 	vertical-align: middle;
+	cursor: default;
 }
-#g-content .m-content-header .m-content-des{
+#g-content .m-content-act{
 	color: #fff;
 	background-color: #39a030;
-	box-shadow: -1px 1px 2px 0px #d4d3d3;
 }
-#g-content .m-content-header .m-content-lan{
+/* 详细课程内容 */
+#m-content-kcul{
+	margin-top: 30px;
+	font-size: 0;
+	line-height: 0;
+}
+#m-content-kcul li{
+	display: inline-block;
+	float: left;
+	width: 225px;
+	height: 228px;
+	margin: 0 18px 18px 0;
+	font: 12px/12px "Microsoft YaHei","微软雅黑";
+	text-align: left;
+	text-indent: 4px;
+	border: 1px solid #fff;
+	box-shadow: -1px 0px 1px 0px #f1f1f1,1px 0px 1px 0px #f1f1f1,0px 1px 2px 0px #e6e6e6;
+}
+#m-content-kcul li img{
+	width: 223px;
+	height: 124px;
+}
+#m-content-kcul li h2{
+	display: block;
+	margin-top: 10px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	color: #333;
+}
+#m-content-kcul li a{
+	display: block;
+	margin-top: 10px;
+	color: #999;
+}
+#m-content-kcul li span{
+	display: inline-block;
+	position: relative;
+	height: 16px;
+	margin: 10px 0 0 4px;
+	padding-right: 3px;
+	line-height: 16px;
+	text-indent: 18px;
+	color: #999;
+	border: 1px solid #ddd;
+}
+#m-content-kcul li span i{
+	display: inline-block;
+	position: absolute;
+	top: 2px;
+	left: 3px;
+	width: 9px;
+	height: 11px;
+	background: url(../images/sprites.png) -60px -280px no-repeat;
+}
+#m-content-kcul li strong{
+	display: block;
+	margin-top: 10px;
+	text-indent: 7px;
+	color:#ff3f00;
+}
+/* /详细课程内容 */
+/* 翻页器 */
+#g-content .m-content{
+	position: relative;
+}
+#m-content-ptbox{
+	position: absolute;
+	bottom: 0;
+	right: 18px;
+	height: 20px;
+	font-size: 0;
+	line-height: 0;
+}
+#m-content-ptbox>div{
+	display: inline-block;
+	width: 30px;
+	height: 20px;
+	line-height: 20px;
+	background-color: #9dd8b1;
+}
+#m-content-ptbox .m-content-pb{
+	margin-right: 12px;
+}
+#m-content-ptbox .m-content-pn{
+	margin-left: 4px;
+}
+#m-content-ptbox div span{
+	display: inline-block;
+	width: 8px;
+	height: 12px;
+	vertical-align: middle;
+}
+#m-content-ptbox .m-content-pb span{
+	background: url(../images/sprites.png) -20px -280px no-repeat;
+}
+#m-content-ptbox .m-content-pn span{
+	background: url(../images/sprites.png) -40px -280px no-repeat;
+}
+.m-content-ptbox ul{
+	display: inline-block;
+	vertical-align: middle;
+}
+#m-content-ptbox .m-content-pt li{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-right: 7px;
+	font: 14px "SimSun","宋体";
 	color: #666;
-	background-color: #fff;
-	box-shadow: 1px 1px 2px 0px #d4d3d3;
+	cursor: default;
 }
+#m-content-ptbox .m-content-pt li:hover{
+	color: #fff;
+	background-color: #9dd8b1;
+}
+#m-content-ptbox .m-content-pt .m-content-pgact{
+	color: #39a030;
+	background-color: #fff;
+}
+/* /翻页器 */
 /* 右边栏 */
 #g-content .m-content-aside h1{
 	width: 223px;
@@ -467,6 +583,16 @@ body{
 	border:1px solid #ecebeb;
 }
 /* /右边栏 */
+/* 清除浮动 */
+.clearfix{
+	content: '.';
+	display: block;
+	clear: both;height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	zoom: 1;
+}
+/* /清除浮动 */
 /* /内容区 */
 /* 底部信息 */
 #g-foot{

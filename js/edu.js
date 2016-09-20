@@ -127,23 +127,23 @@ var bannerImg=gEBId('m-banner-list');
 var bannerImgLi=gEBTN(bannerImg,'li');
 var bannerBarLi=gEBId('m-banner-bar').getElementsByTagName('span');
 var banner=gEBId('g-banner');
-//初始化一个now用于存储轮播状态
-var now=0;
+//初始化一个nowbanner用于存储轮播状态
+var nowbanner=0;
 //监听按钮点击事件，点击后调用切换函数
 for (var i = 0, len=bannerBarLi.length; i < len; i++){
 	bannerBarLi[i].index=i;
 	bannerBarLi[i].onclick=function(){
-		now=this.index;
+		nowbanner=this.index;
 		bannerTab();
 	};
 }
-//切换函数，先清空所有按钮和轮播图的显示状态，然后给now状态的按钮及轮播图添加显示样式并调用fadein淡入函数
+//切换函数，先清空所有按钮和轮播图的显示状态，然后给nowbanner状态的按钮及轮播图添加显示样式并调用fadein淡入函数
 function bannerTab() {
 	//控制bannerBarLi的className
 	for(var i=0,ilen=bannerBarLi.length;i<ilen;i++){
 		bannerBarLi[i].className = '';
 	}
-	bannerBarLi[now].className = 'm-bar-active';
+	bannerBarLi[nowbanner].className = 'm-bar-active';
 
 	//控制bannerImgLi的className
 	for(var j=0,jlen=bannerImgLi.length;j<jlen;j++){
@@ -152,16 +152,16 @@ function bannerTab() {
 		bannerImgLi[j].style.opacity = 0;
 		bannerImgLi[j].style.filter='alpha(opacity='+0+')';
 	}
-	bannerImgLi[now].className = 'm-img-active';
+	bannerImgLi[nowbanner].className = 'm-img-active';
 	//淡入调用，传入需要淡入的节点及淡入过程的时间，单位‘ms’
-	fadein(bannerImgLi[now], 500);
+	fadein(bannerImgLi[nowbanner], 500);
 }
 //自动轮播函数
 function next() {
-	now++;
-	//判断bannerBarLi目前的位置，播到最后一张时将now归零
-	if(now == bannerBarLi.length) {
-		now = 0;
+	nowbanner++;
+	//判断bannerBarLi目前的位置，播到最后一张时将nowbanner归零
+	if(nowbanner == bannerBarLi.length) {
+		nowbanner = 0;
 	}
 	bannerTab();
 }
@@ -176,3 +176,126 @@ banner.onmouseout = function() {
 	teimr = setInterval(next,5000);
 };
 /* /banner区 */
+/* 内容区 */
+/* 内容区的详细课程区域 */
+//获取内容区节点
+var content=gEBId('g-content');
+//获取内容区Tab的节点
+var cHead=gEBId('m-content-header');
+//获取内容区Tab的节点列表
+var cHeadLi=gEBTN(cHead,'h1');
+//获取内容区课程节点
+var cKc=gEBId('m-content-kcul');
+//获取内容区课程节点列表
+var cKcLi=gEBTN(cKc,'li');
+//获取翻页器节点
+var cPg=gEBId('m-content-pt');
+//获取翻页器节点列表
+var cPgLi=gEBTN(cPg,'li');
+//获取翻页器上一页节点
+var cPb=gEBId('m-content-pb');
+//获取翻页器下一页节点
+var cPn=gEBId('m-content-pn');
+//调用Ajax所获得的数据及当前页信息来设置课程列表内容
+function setKc(data,pNum){
+	//清空课程列表和翻页器列表
+	cPg.innerHTML='';
+	cKc.innerHTML='';
+	//获取总的页数并新建翻页器
+	var totalNum=data.totalPage;
+	for (var i=1;i<=totalNum;i++){
+		var ptLi=document.createElement('li');
+		ptLi.innerText=i;
+		cPg.appendChild(ptLi);
+	}
+	//清空所有页码样式并给当前页的页码注入样式
+	for (var e=0;e<totalNum;e++){
+		cPgLi[e].className = '';
+	}
+	cPgLi[pNum-1].className ='m-content-pgact';
+	//获取当前页的每页课程数量并新建列表
+	var pSize=data.pagination.pageSize;
+	for (var j=0;j<pSize;j++){
+		var Kclist=document.createElement('li');
+		cKc.appendChild(Kclist);
+	}
+	//获取课程列表详情并依次填充新建的列表
+	var pList=data.list;
+	for (var k=0;k<pSize;k++){
+		pList[k].price=(pList[k].price==0)?'免费':pList[k].price.toFixed(2);
+		cKcLi[k].innerHTML='<img src="'+pList[k].middlePhotoUrl+'" alt="'+pList[k].name+'"><h2>'+pList[k].name+'</h2><a href="'+pList[k].providerLink+'" target="_blank" rel="nofollow" title="'+pList[k].provider+'">'+pList[k].provider+'</a><span><i></i>'+pList[k].learnerCount+'</span><strong>'+((pList[k].price=='免费')?'':'&#65509;')+pList[k].price+'</strong>';
+	}
+}
+function KcAjax(pageN,pageS,pageT){
+	for (var i=0,ilen=cHeadLi.length;i<ilen;i++){
+		cHeadLi[i].className = '';
+	}
+	cHeadLi[pTabNow].className='m-content-act';
+	get('http://study.163.com/webDev/couresByCategory.htm',{pageNo:pageN,psize:pageS,type:pageT},function(data){
+		var dataList=JSON.parse(data);
+		setKc(dataList,pageN);
+		for (var j=0,jlen=cPgLi.length;j<jlen;j++){
+			cPgLi[j].index=j;
+			addEvent(cPgLi[j],'click',function(event){
+				pNoNow=this.index;
+				var pageN=pNoNow+1;
+				var pageT=(pTabNow+1)*10;
+				var pageS=pSizeNow;
+				KcAjax(pageN,pageS,pageT);
+			});
+		}
+	});
+	return;
+}
+var pTabNow=0,pNoNow=0;
+var pSizeNow=(function(){
+	return document.documentElement.clientWidth<1205?15:20;
+})();
+KcAjax(1,pSizeNow,10);
+for (var i=0,ilen=cHeadLi.length;i<ilen;i++){
+	cHeadLi[i].index=i;
+	cHeadLi[i].onclick=function(){
+		pTabNow=this.index;
+		var pageT=(pTabNow+1)*10;
+		KcAjax(1,pSizeNow,pageT);
+	};
+}
+function pageBefore(pageN,pageS,pageT){
+	pageT=(pageT+1)*10;
+	if(pageN==0){
+		pageN=1;
+		KcAjax(pageN,pageS,pageT);
+	}else{
+		KcAjax(pageN,pageS,pageT);
+		--pNoNow;
+	}
+}
+function pageNext(pageN,pageS,pageT){
+	pageT=(pageT+1)*10;
+	if(pageN==(cPgLi.length-1)){
+		pNoNow=cPgLi.length-1;
+		pageN=cPgLi.length;
+		KcAjax(pageN,pageS,pageT);
+	}else{
+		pageN+=2;
+		KcAjax(pageN,pageS,pageT);
+		++pNoNow;
+	}
+}
+function pageResize(pageN,pageS,pageT){
+	pageS=document.documentElement.clientWidth<1205?15:20;
+	++pageN;
+	pageT=(pageT+1)*10;
+	KcAjax(pageN,pageS,pageT);
+}
+addEvent(cPb,'click',function(event){
+	pageBefore(pNoNow,pSizeNow,pTabNow);
+});
+addEvent(cPn,'click',function(event){
+	pageNext(pNoNow,pSizeNow,pTabNow);
+});
+addEvent(window,'resize',function(event){
+	pageResize(pNoNow,pSizeNow,pTabNow);
+});
+/* 内容区的详细课程区域 */
+/* /内容区 */
