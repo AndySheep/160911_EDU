@@ -148,13 +148,8 @@ function bannerTab() {
 	//控制bannerImgLi的className
 	for(var j=0,jlen=bannerImgLi.length;j<jlen;j++){
 		bannerImgLi[j].style.display='none';
-/*		bannerImgLi[j].className = '';
-		//把其他li的opacity设置0
-		bannerImgLi[j].style.opacity = 0;
-		bannerImgLi[j].style.filter='alpha(opacity='+0+')';*/
 	}
 	bannerImgLi[nowbanner].style.display='inline-block';
-	// bannerImgLi[nowbanner].className = 'm-img-active';
 	//淡入调用，传入需要淡入的节点及淡入过程的时间，单位‘ms’
 	fadein(bannerImgLi[nowbanner], 500);
 }
@@ -224,41 +219,41 @@ function setKc(data,pNum){
 	//获取课程列表详情并依次填充新建的列表
 	var pList=data.list;
 	function fillcKcLi(cKcLi,pList){
-		cKcLi.innerHTML='<div class="m-content-liMEnter"><img src="'+pList.middlePhotoUrl+'" alt="'+pList.name+'"><h2>'+pList.name+'</h2><a href="'+pList.providerLink+'" target="_blank" rel="nofollow" title="'+pList.provider+'">'+pList.provider+'</a><span><i></i>'+pList.learnerCount+'</span><strong>'+((pList.price=='免费')?'':'&#65509;')+pList.price+'</strong></div>'+'<div class="m-content-liMleave"><img src="'+pList.middlePhotoUrl+'" alt="'+pList.name+'"><h2>'+pList.name+'</h2><i></i><em>'+pList.learnerCount+'人在学</em><strong>发布者 : <a href="'+pList.providerLink+'" target="_blank" rel="nofollow" title="'+pList.provider+'">'+pList.provider+'</a></strong><span>分类 : '+(pList.categoryName==null?'暂无分类':pList.categoryName)+'</span><div><p>'+pList.description+'</p></div></div>';
+		cKcLi.innerHTML='<div class="m-content-liMEnter"><img src="'+pList.middlePhotoUrl+'" alt="'+pList.name+'"><h2>'+pList.name+'</h2><a href="'+pList.providerLink+'" target="_blank" rel="nofollow" title="'+pList.provider+'">'+pList.provider+'</a><span><i></i>'+pList.learnerCount+'</span><strong>'+((pList.price=='免费')?'':'&#65509;')+pList.price+'</strong></div>'+'<div class="m-content-liMleave"><img src="'+pList.middlePhotoUrl+'" alt="'+pList.name+'"><a href="'+pList.providerLink+'" target="_blank" rel="nofollow" title="'+pList.provider+'"><h2>'+pList.name+'</h2></a><i></i><em>'+pList.learnerCount+'人在学</em><strong>发布者 : <a href="'+pList.providerLink+'" target="_blank" rel="nofollow" title="'+pList.provider+'">'+pList.provider+'</a></strong><span>分类 : '+(pList.categoryName==null?'暂无分类':pList.categoryName)+'</span><div><p>'+pList.description+'</p></div></div>';
 	}
 	//先判断价格值是否为0，若为0则先转换成‘免费’字符串然后填充，否则直接填充列表
 	for (var k=0;k<pSize;k++){
 		pList[k].price=(pList[k].price==0)?'免费':pList[k].price.toFixed(2);
 		fillcKcLi(cKcLi[k],pList[k]);
 	}
-	//先储存课程列表下标，然后监听mouseenter和mouseleave事件，触发后分别给原列表和浮窗设置显示和隐藏的样式，以达到浮窗效果
-	for (var f=0;f<pSize;f++){
-		cKcLi[f].index=f;
-		addEvent(cKcLi[f],'mouseenter',function(event){
-			var mseenternow=this.index;
-			var cKcLiOrg=gEBCN(cKcLi[mseenternow],'m-content-liMEnter');
-			var cKcLiNow=gEBCN(cKcLi[mseenternow],'m-content-liMleave');
-			cKcLiOrg[0].style.display='none';
-			cKcLiNow[0].style.display='inline-block';
-		});
-		addEvent(cKcLi[f],'mouseleave',function(event){
-			var mseleavenow=this.index;
-			var cKcLiOrg=gEBCN(cKcLi[mseleavenow],'m-content-liMEnter');
-			var cKcLiNow=gEBCN(cKcLi[mseleavenow],'m-content-liMleave');
-			cKcLiOrg[0].style.display='inline-block';
-			cKcLiNow[0].style.display='none';
-		});
+	//此处是采用闭包的方式储存课程列表下标，然后监听mouseenter和mouseleave事件，触发后分别给原列表和浮窗设置显示和隐藏的样式，以达到浮窗效果
+	for(var f=0;f<pSize;f++){
+		(function(f){
+			addEvent(cKcLi[f],'mouseenter',function(event){
+				var cKcLiOrg=gEBCN(cKcLi[f],'m-content-liMEnter');
+				var cKcLiNow=gEBCN(cKcLi[f],'m-content-liMleave');
+				cKcLiOrg[0].style.display='none';
+				cKcLiNow[0].style.display='inline-block';
+			});
+			addEvent(cKcLi[f],'mouseleave',function(event){
+				var cKcLiOrg=gEBCN(cKcLi[f],'m-content-liMEnter');
+				var cKcLiNow=gEBCN(cKcLi[f],'m-content-liMleave');
+				cKcLiOrg[0].style.display='inline-block';
+				cKcLiNow[0].style.display='none';
+			});
+		})(f);
 	}
 	//先储存页码下标，然后监听页码点击，触发后修改当前页码值并调用Ajax读取数据及重新设置列表
-	for (var g=0,glen=cPgLi.length;g<glen;g++){
-		cPgLi[g].index=g;
-		addEvent(cPgLi[g],'click',function(event){
-			pNoNow=this.index;
-			var pageN=pNoNow+1;
-			var pageT=(pTabNow+1)*10;
-			var pageS=pSizeNow;
-			KcAjax(pageN,pageS,pageT);
-		});
+	for (var g=0,glen=totalNum;g<glen;g++){
+		(function (g){
+			addEvent(cPgLi[g],'click',function(event){
+				pNoNow=g;
+				var pageN=pNoNow+1;
+				var pageT=(pTabNow+1)*10;
+				var pageS=pSizeNow;
+				KcAjax(pageN,pageS,pageT);
+			});
+		})(g);
 	}
 }
 //先设置当前Tab页的样式，然后调用Ajax获取数据并执行setKc函数
@@ -327,4 +322,62 @@ addEvent(window,'resize',function(event){
 	pageResize(pNoNow,pSizeNow,pTabNow);
 });
 /* 内容区的详细课程区域 */
+/* 视频弹窗 */
+//依次获取弹出的视频窗口节点、弹出的视频节点、首页视频图片节点和视频关闭按钮节点
+var video=gEBId('m-content-videopop');
+var playvideo=gEBId('m-content-videoplay');
+var popvideo=gEBId('m-content-videoimg');
+var closevideo=gEBId('m-content-videoclose');
+//监听首页视频图片点击事件，触发后弹出视频窗口和遮罩，点击空间上的播放按钮后即可播放，设置了预加载()
+addEvent(popvideo,'click',function(event){
+	show(mask);
+	show(video);
+});
+//监听视频窗口关闭按钮点击事件，触发后先暂停播放，然后关闭视频弹窗和遮罩
+addEvent(closevideo,'click',function(event){
+	playvideo.pause();
+	close(video);
+	close(mask);
+});
+//增加一个视频区点击可以控制播放和暂停的效果
+addEvent(playvideo,'click',function(event){
+	if(!!playvideo.paused){
+		playvideo.play();
+	}else{
+		playvideo.pause();
+	}
+});
+/* /视频弹窗 */
+/* 最热排行 */
+//依次获得排行榜节点、ol节点和节点列表
+var hot=gEBId('m-content-hot');
+var hotLists=gEBTN(hot,'ol')[0];
+var hotLi=gEBTN(hotLists,'li');
+//排行榜设置函数，在获取Ajax调用的数据后设置排行榜内容并间隔5秒滚动
+function setHotline(arrHot){
+	//依次创建十个空li
+	for (var i=0;i<20;i++){
+		var Li=document.createElement('li');
+		hotLists.appendChild(Li);
+	}
+	//依次将Ajax获取到的内容填入li中
+	for (var j=0;j<20;j++){
+		hotLi[j].innerHTML='<img src="'+arrHot[j].smallPhotoUrl+'" alt="'+arrHot[j].name+'"><h2>'+arrHot[j].name+'</h2><em><span></span>'+arrHot[j].learnerCount+'</em>';
+	}
+	//更改排行榜，每隔5秒将hotLists列表的第一个子节点取出保存并添加到最后
+	function changeHot(){
+		var hotLihead=hotLists.firstChild;
+		hotLists.removeChild(hotLists.firstChild);
+		hotLists.appendChild(hotLihead);
+	}
+	setInterval(changeHot,5000);
+}
+//获取最热排行的Ajax数据并调用设置排行榜函数
+function hotAjax(){
+	get('http://study.163.com/webDev/hotcouresByCategory.htm','',function(hotData){
+		setHotline(JSON.parse(hotData));
+	});
+}
+hotAjax();
+/* /最热排行 */
 /* /内容区 */

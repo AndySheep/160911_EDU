@@ -157,20 +157,21 @@
             <h1>机构介绍</h1>
             <div class="m-content-video">
                 <p>观看下面的视频来了解吧：</p>
-                <img src="./images/video.jpg" alt="video">
+                <img id="m-content-videoimg" src="./images/video.jpg" alt="video">
+                <div id="m-content-videopop">
+                    <h2>请观看下面的视频</h2>
+                    <span id="m-content-videoclose"></span>
+                    <video id="m-content-videoplay" width=887 controls preload="auto">
+                        <source src="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
         <div class="m-content-hot">
             <h1>最热排行</h1>
             <!-- 实时排行 -->
-            <div>
-                <ol>
-                    <li>
-                        <img src="" alt="">
-                        <h2></h2>
-                        <span></span>
-                    </li>
-                </ol>
+            <div id="m-content-hot">
+                <ol></ol>
             </div>
             <!-- /实时排行 -->
         </div>

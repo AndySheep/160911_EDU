@@ -391,7 +391,7 @@ body{
 	font-size: 0;
 }
 #g-content .m-content{
-	width: 981px;
+	width: 980px;
 	height: 1350px;
 }
 #g-content>div{
@@ -447,7 +447,8 @@ body{
 	text-align: center;
 }
 #m-content-kcul li .m-content-liMEnter h2{
-	display: block;
+	display: inline-block;
+	width: 223px;
 	margin-top: 10px;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -456,8 +457,12 @@ body{
 	text-indent: 4px;
 }
 #m-content-kcul li .m-content-liMEnter a{
-	display: block;
+	display: inline-block;
+	width: 223px;
 	margin-top: 10px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 	color: #999;
 	text-indent: 4px;
 }
@@ -488,7 +493,7 @@ body{
 	text-indent: 7px;
 	color:#ff3f00;
 }
-/* 定义mouseover时的样式 */
+/* 定义mouseenter时的样式 */
 #m-content-kcul .m-content-liMleave{
 	display: none;
 	position: absolute;
@@ -520,6 +525,9 @@ body{
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+}
+#m-content-kcul .m-content-liMleave h2:hover{
+	color: #39a030;
 }
 #m-content-kcul .m-content-liMleave em{
 	position: absolute;
@@ -685,9 +693,101 @@ body{
 	font: 16px/55px "Microsoft YaHei","微软雅黑";
 	color: #333;
 }
-#g-content .m-content-aside .m-content-hot div{
-	border:1px solid #ecebeb;
+/* 视频弹窗 */
+#m-content-videopop{
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	width: 950px;
+	height: 630px;
+	margin-left: -475px;
+	font-size: 0;
+	background-color: #fff;
+	z-index: 299;
 }
+#m-content-videopop h2{
+	position: absolute;
+	top: 29px;
+	left: 31px;
+	font: 18px/18px "Microsoft YaHei","微软雅黑";
+	color: #444;
+}
+#m-content-videopop span{
+	display: inline-block;
+	position: absolute;
+	top: 13px;
+	right: 12px;
+	width: 10px;
+	height: 10px;
+	background: url(../images/sprites.png) -40px -260px no-repeat;
+}
+#m-content-videopop video{
+	position: absolute;
+	top: 69px;
+	left: 31px;
+}
+/* /视频弹窗 */
+/* 最热排行 */
+#m-content-hot{
+	display: inline-block;
+	position: relative;
+	width: 224px;
+	height: 721px;
+	border:1px solid #ecebeb;
+	box-shadow: 0 1px 1px 0 #ecebeb;
+}
+#m-content-hot ol{
+	position: absolute;
+	top: 19px;
+	left: 20px;
+	width: 183px;
+	height: 685px;
+	overflow: hidden;
+	border-width: 0;
+}
+#m-content-hot ol li{
+	display: block;
+	position: relative;
+	height: 50px;
+	margin-bottom: 20px;
+}
+#m-content-hot ol li img{
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 50px;
+}
+#m-content-hot ol li h2{
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 60px;
+	width: 121px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	font: 14px/14px "Microsoft YaHei","微软雅黑";
+	color: #333;
+}
+#m-content-hot ol li em{
+	display: inline-block;
+	position: absolute;
+	top: 27px;
+	left: 63px;
+	font: 9px/9px "Microsoft YaHei","微软雅黑";
+	color: #999;
+}
+#m-content-hot ol li em span{
+	display: inline-block;
+	width: 9px;
+	height: 10px;
+	margin-right: 6px;
+	background: url(../images/sprites.png) -60px -280px no-repeat;
+}
+/* /最热排行 */
 /* /右边栏 */
 /* 清除浮动 */
 .clearfix{
