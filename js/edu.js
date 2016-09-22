@@ -147,12 +147,14 @@ function bannerTab() {
 
 	//控制bannerImgLi的className
 	for(var j=0,jlen=bannerImgLi.length;j<jlen;j++){
-		bannerImgLi[j].className = '';
+		bannerImgLi[j].style.display='none';
+/*		bannerImgLi[j].className = '';
 		//把其他li的opacity设置0
 		bannerImgLi[j].style.opacity = 0;
-		bannerImgLi[j].style.filter='alpha(opacity='+0+')';
+		bannerImgLi[j].style.filter='alpha(opacity='+0+')';*/
 	}
-	bannerImgLi[nowbanner].className = 'm-img-active';
+	bannerImgLi[nowbanner].style.display='inline-block';
+	// bannerImgLi[nowbanner].className = 'm-img-active';
 	//淡入调用，传入需要淡入的节点及淡入过程的时间，单位‘ms’
 	fadein(bannerImgLi[nowbanner], 500);
 }
@@ -196,7 +198,7 @@ var cPgLi=gEBTN(cPg,'li');
 var cPb=gEBId('m-content-pb');
 //获取翻页器下一页节点
 var cPn=gEBId('m-content-pn');
-//调用Ajax所获得的数据及当前页信息来设置课程列表内容
+//设置课程列表及翻页器列表函数，调用Ajax所获得的数据及当前页信息来设置课程列表内容
 function setKc(data,pNum){
 	//清空课程列表和翻页器列表
 	cPg.innerHTML='';
@@ -221,11 +223,45 @@ function setKc(data,pNum){
 	}
 	//获取课程列表详情并依次填充新建的列表
 	var pList=data.list;
+	function fillcKcLi(cKcLi,pList){
+		cKcLi.innerHTML='<div class="m-content-liMEnter"><img src="'+pList.middlePhotoUrl+'" alt="'+pList.name+'"><h2>'+pList.name+'</h2><a href="'+pList.providerLink+'" target="_blank" rel="nofollow" title="'+pList.provider+'">'+pList.provider+'</a><span><i></i>'+pList.learnerCount+'</span><strong>'+((pList.price=='免费')?'':'&#65509;')+pList.price+'</strong></div>'+'<div class="m-content-liMleave"><img src="'+pList.middlePhotoUrl+'" alt="'+pList.name+'"><h2>'+pList.name+'</h2><i></i><em>'+pList.learnerCount+'人在学</em><strong>发布者 : <a href="'+pList.providerLink+'" target="_blank" rel="nofollow" title="'+pList.provider+'">'+pList.provider+'</a></strong><span>分类 : '+(pList.categoryName==null?'暂无分类':pList.categoryName)+'</span><div><p>'+pList.description+'</p></div></div>';
+	}
+	//先判断价格值是否为0，若为0则先转换成‘免费’字符串然后填充，否则直接填充列表
 	for (var k=0;k<pSize;k++){
 		pList[k].price=(pList[k].price==0)?'免费':pList[k].price.toFixed(2);
-		cKcLi[k].innerHTML='<img src="'+pList[k].middlePhotoUrl+'" alt="'+pList[k].name+'"><h2>'+pList[k].name+'</h2><a href="'+pList[k].providerLink+'" target="_blank" rel="nofollow" title="'+pList[k].provider+'">'+pList[k].provider+'</a><span><i></i>'+pList[k].learnerCount+'</span><strong>'+((pList[k].price=='免费')?'':'&#65509;')+pList[k].price+'</strong>';
+		fillcKcLi(cKcLi[k],pList[k]);
+	}
+	//先储存课程列表下标，然后监听mouseenter和mouseleave事件，触发后分别给原列表和浮窗设置显示和隐藏的样式，以达到浮窗效果
+	for (var f=0;f<pSize;f++){
+		cKcLi[f].index=f;
+		addEvent(cKcLi[f],'mouseenter',function(event){
+			var mseenternow=this.index;
+			var cKcLiOrg=gEBCN(cKcLi[mseenternow],'m-content-liMEnter');
+			var cKcLiNow=gEBCN(cKcLi[mseenternow],'m-content-liMleave');
+			cKcLiOrg[0].style.display='none';
+			cKcLiNow[0].style.display='inline-block';
+		});
+		addEvent(cKcLi[f],'mouseleave',function(event){
+			var mseleavenow=this.index;
+			var cKcLiOrg=gEBCN(cKcLi[mseleavenow],'m-content-liMEnter');
+			var cKcLiNow=gEBCN(cKcLi[mseleavenow],'m-content-liMleave');
+			cKcLiOrg[0].style.display='inline-block';
+			cKcLiNow[0].style.display='none';
+		});
+	}
+	//先储存页码下标，然后监听页码点击，触发后修改当前页码值并调用Ajax读取数据及重新设置列表
+	for (var g=0,glen=cPgLi.length;g<glen;g++){
+		cPgLi[g].index=g;
+		addEvent(cPgLi[g],'click',function(event){
+			pNoNow=this.index;
+			var pageN=pNoNow+1;
+			var pageT=(pTabNow+1)*10;
+			var pageS=pSizeNow;
+			KcAjax(pageN,pageS,pageT);
+		});
 	}
 }
+//先设置当前Tab页的样式，然后调用Ajax获取数据并执行setKc函数
 function KcAjax(pageN,pageS,pageT){
 	for (var i=0,ilen=cHeadLi.length;i<ilen;i++){
 		cHeadLi[i].className = '';
@@ -234,24 +270,18 @@ function KcAjax(pageN,pageS,pageT){
 	get('http://study.163.com/webDev/couresByCategory.htm',{pageNo:pageN,psize:pageS,type:pageT},function(data){
 		var dataList=JSON.parse(data);
 		setKc(dataList,pageN);
-		for (var j=0,jlen=cPgLi.length;j<jlen;j++){
-			cPgLi[j].index=j;
-			addEvent(cPgLi[j],'click',function(event){
-				pNoNow=this.index;
-				var pageN=pNoNow+1;
-				var pageT=(pTabNow+1)*10;
-				var pageS=pSizeNow;
-				KcAjax(pageN,pageS,pageT);
-			});
-		}
 	});
 	return;
 }
+//初定当前Tab页及页码页下标为0，供所有函数调用
 var pTabNow=0,pNoNow=0;
+//根据初始浏览器窗口大小设定每页课程的初始数量，供所有函数调用
 var pSizeNow=(function(){
 	return document.documentElement.clientWidth<1205?15:20;
 })();
+//初始化页面，默认为产品设计第一页
 KcAjax(1,pSizeNow,10);
+//监听Tab页点击事件，并将当前页码归1后调用Ajax获取数据及设置课程列表
 for (var i=0,ilen=cHeadLi.length;i<ilen;i++){
 	cHeadLi[i].index=i;
 	cHeadLi[i].onclick=function(){
@@ -260,40 +290,39 @@ for (var i=0,ilen=cHeadLi.length;i<ilen;i++){
 		KcAjax(1,pSizeNow,pageT);
 	};
 }
-function pageBefore(pageN,pageS,pageT){
+//上一页函数，先判断是否已到第一页，若已经是第一页，则不执行任何动作，否则根据跳转上一页并将下标减1
+function pageUp(pageN,pageS,pageT){
 	pageT=(pageT+1)*10;
-	if(pageN==0){
-		pageN=1;
-		KcAjax(pageN,pageS,pageT);
-	}else{
+	if(pageN>0){
 		KcAjax(pageN,pageS,pageT);
 		--pNoNow;
 	}
 }
+//下一页函数，先判断是否已到最后一页,若已经是最后一页，则不执行任何动作，否则根据跳转下一页并将下标加1
 function pageNext(pageN,pageS,pageT){
 	pageT=(pageT+1)*10;
-	if(pageN==(cPgLi.length-1)){
-		pNoNow=cPgLi.length-1;
-		pageN=cPgLi.length;
-		KcAjax(pageN,pageS,pageT);
-	}else{
+	if(pageN<(cPgLi.length-1)){
 		pageN+=2;
 		KcAjax(pageN,pageS,pageT);
 		++pNoNow;
 	}
 }
+//每页课程数量重置函数，判断浏览器窗口大小，当浏览器窗口宽度小于1205px时，将每页课程数量设置为15项，否则设置为20项
 function pageResize(pageN,pageS,pageT){
 	pageS=document.documentElement.clientWidth<1205?15:20;
 	++pageN;
 	pageT=(pageT+1)*10;
 	KcAjax(pageN,pageS,pageT);
 }
+//监听上一页按钮点击事件，触发后调用上一页函数
 addEvent(cPb,'click',function(event){
-	pageBefore(pNoNow,pSizeNow,pTabNow);
+	pageUp(pNoNow,pSizeNow,pTabNow);
 });
+//监听下一页按钮点击事件，触发后调用下一页函数
 addEvent(cPn,'click',function(event){
 	pageNext(pNoNow,pSizeNow,pTabNow);
 });
+//监听浏览器窗口大小变化事件，触发后调用课程数量重置函数
 addEvent(window,'resize',function(event){
 	pageResize(pNoNow,pSizeNow,pTabNow);
 });

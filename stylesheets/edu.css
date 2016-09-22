@@ -263,7 +263,11 @@ body{
 	height: 460px;
 	overflow-x: hidden;
 }
-#g-banner .m-banner-box ul li{
+.m-img-active{
+	display: inline-block;
+}
+.m-banner-box ul li{
+	display: none;
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -287,9 +291,6 @@ body{
 	margin: 0 5.5px;
 	border-radius: 5px;
 	background-color: #fff;
-}
-.m-img-active{
-	z-index: 9;
 }
 #g-banner .m-banner-bar .m-bar-active{
 	background-color: #333;
@@ -422,40 +423,45 @@ body{
 }
 /* 详细课程内容 */
 #m-content-kcul{
+	display: inline-block;
 	margin-top: 30px;
 	font-size: 0;
 	line-height: 0;
 }
 #m-content-kcul li{
 	display: inline-block;
+	position: relative;
 	float: left;
 	width: 225px;
 	height: 228px;
 	margin: 0 18px 18px 0;
 	font: 12px/12px "Microsoft YaHei","微软雅黑";
 	text-align: left;
-	text-indent: 4px;
 	border: 1px solid #fff;
 	box-shadow: -1px 0px 1px 0px #f1f1f1,1px 0px 1px 0px #f1f1f1,0px 1px 2px 0px #e6e6e6;
 }
-#m-content-kcul li img{
+#m-content-kcul li .m-content-liMEnter img{
 	width: 223px;
 	height: 124px;
+	margin: 1px 0 0 1px;
+	text-align: center;
 }
-#m-content-kcul li h2{
+#m-content-kcul li .m-content-liMEnter h2{
 	display: block;
 	margin-top: 10px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 	color: #333;
+	text-indent: 4px;
 }
-#m-content-kcul li a{
+#m-content-kcul li .m-content-liMEnter a{
 	display: block;
 	margin-top: 10px;
 	color: #999;
+	text-indent: 4px;
 }
-#m-content-kcul li span{
+#m-content-kcul li .m-content-liMEnter span{
 	display: inline-block;
 	position: relative;
 	height: 16px;
@@ -466,7 +472,7 @@ body{
 	color: #999;
 	border: 1px solid #ddd;
 }
-#m-content-kcul li span i{
+#m-content-kcul li .m-content-liMEnter span i{
 	display: inline-block;
 	position: absolute;
 	top: 2px;
@@ -474,12 +480,112 @@ body{
 	width: 9px;
 	height: 11px;
 	background: url(../images/sprites.png) -60px -280px no-repeat;
+	text-indent: 4px;
 }
-#m-content-kcul li strong{
+#m-content-kcul li .m-content-liMEnter strong{
 	display: block;
 	margin-top: 10px;
 	text-indent: 7px;
 	color:#ff3f00;
+}
+/* 定义mouseover时的样式 */
+#m-content-kcul .m-content-liMleave{
+	display: none;
+	position: absolute;
+	top: -11px;
+	left: -11px;
+	width: 482px;
+	height: 240px;
+	padding: 11px;
+	box-sizing: border-box;
+	border: 1px solid #d0cfd0;
+	box-shadow: 1px 1px 1px 0px #f1f1f1,-1px -1px 1px 0px #ebebeb;
+	background-color: #fff;
+	font: 12px/12px "Microsoft YaHei","微软雅黑";
+	color: #666;
+	z-index: 29;
+}
+#m-content-kcul .m-content-liMleave img{
+	display: inline-block;
+	width: 223px;
+	height: 124px;
+}
+#m-content-kcul .m-content-liMleave h2{
+	position: absolute;
+	top: 15px;
+	left: 253px;
+	width: 195px;
+	font: 18px/18px "Microsoft YaHei","微软雅黑";
+	color: #333;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#m-content-kcul .m-content-liMleave em{
+	position: absolute;
+	top: 50px;
+	left: 272px;
+}
+#m-content-kcul .m-content-liMleave i{
+	display: inline-block;
+	position: absolute;
+	top: 51px;
+	left: 257px;
+	width: 9px;
+	height: 11px;
+	margin: 0 6px 0 0;
+	background: url(../images/sprites.png) -60px -280px no-repeat;
+}
+#m-content-kcul .m-content-liMleave strong{
+	position: absolute;
+	top: 75px;
+	left: 256px;
+}
+#m-content-kcul .m-content-liMleave strong a{
+	display: inline-block;
+}
+#m-content-kcul .m-content-liMleave strong a:hover{
+	text-decoration: underline
+}
+#m-content-kcul .m-content-liMleave span{
+	position: absolute;
+	top: 95px;
+	left: 256px;
+}
+#m-content-kcul .m-content-liMleave div{
+	position: absolute;
+	top: 168px;
+	left: 21px;
+	width: 426px;
+	height: 54px;
+	overflow: hidden;
+	font: 14px/24px "Microsoft YaHei","微软雅黑";
+	color: #666;
+	white-space: normal;
+}
+#m-content-kcul .m-content-liMleave div p{
+	position: relative;
+	-webkit-animation: cDcp 30s both ease infinite;
+	-moz-animation: cDcp 30s both ease infinite;
+	-ms-animation: cDcp 30s both ease infinite;
+	-o-animation: cDcp 30s both ease infinite;
+	animation: cDcp 30s both ease infinite;
+	-webkit-animation-delay: 1s;
+	-moz-animation-delay: 1s;
+	-ms-animation-delay: 1s;
+	-o-animation-delay: 1s;
+	animation-delay: 1s;
+}
+#m-content-kcul .m-content-liMleave div p:hover{
+	-webkit-animation-play-state: paused;
+	-moz-animation-play-state: paused;
+	-ms-animation-play-state: paused;
+	-o-animation-play-state: paused;
+	animation-play-state: paused;
+}
+@-webkit-keyframes cDcp{
+    from{top:0;}
+    to{top:-100%;}
 }
 /* /详细课程内容 */
 /* 翻页器 */
