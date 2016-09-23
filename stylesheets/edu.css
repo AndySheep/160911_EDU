@@ -2,13 +2,8 @@
 body{
 	min-width: 1206px;
 }
-#g-note,#g-head,#g-banner,#g-content,#g-foot{
+#g-note,#g-head,#g-content,#g-foot{
 	text-align: center;
-}
-#g-info ul{
-	display: table;
-	width: 1206px;
-	margin: 0 auto;
 }
 /* /主体居中设置 */
 /* 顶部通知条 */
@@ -72,7 +67,7 @@ body{
 	vertical-align: text-bottom;
 	background: url(../images/sprites.png) 0 -300px no-repeat;
 }
-#g-head #m-head-login{
+#m-head-login{
 	width: 54px;
 	height: 22px;
 	margin-left: 30px;
@@ -84,10 +79,10 @@ body{
 	border-radius: 2px;
 	cursor: pointer;
 }
-#g-head #m-head-login:hover{
+#m-head-login:hover{
 	background-color: #2fb556;
 }
-#g-head #m-head-login span{
+#m-head-login span{
 	width: 8px;
 	height: 8px;
 	margin-right: 5px;
@@ -102,7 +97,7 @@ body{
 	color: #666;
 }
 /* 已关注 */
-#g-head #m-head-loginok{
+#m-head-loginok{
 	width: 106px;
 	height: 21px;
 	margin-left: 30px;
@@ -112,20 +107,20 @@ body{
 	color: #333;
 	border: 1px solid #efefef;
 }
-#g-head #m-head-loginok .m-loginok-log{
+#m-head-loginok .m-loginok-log{
 	width: 11px;
 	height: 9px;
 	margin-right: 5px;
 	background: url(../images/sprites.png) -20px -240px no-repeat;
 }
-#g-head #m-head-loginok span{
+#m-head-loginok span{
 	color: #ccc;
 }
-#g-head #m-head-loginok strong{
+#m-head-loginok strong{
 	cursor: pointer;
 	color: #999;
 }
-#g-head #m-head-loginok strong:hover{
+#m-head-loginok strong:hover{
 	color: #21a557;
 	text-decoration: underline;
 }
@@ -142,7 +137,7 @@ body{
 	z-index: 199;
 	background-color: #fff;
 }
-#g-loginForm #m-loginshmsg{
+#m-loginshmsg{
 	display: none;
 	position: absolute;
 	top: 30px;
@@ -194,7 +189,7 @@ body{
 	font: 16px/16px "Microsoft YaHei","微软雅黑";
 	color: #ccc;
 }
-#m-loginForm #m-login-button{
+#m-login-button{
 	width: 295px;
 	height: 48px;
 	margin-top: 14px;
@@ -230,14 +225,15 @@ body{
 #g-head .m-head-nav ul li a:hover{
 	color: #39a030;
 }
-#g-head .search{
+#g-head .m-head-nav .search{
 	width: 18px;
 	height: 18px;
 	margin-right: 15px;
+	vertical-align: super;
 	background: url(../images/sprites.png) 0px -240px no-repeat;
 }
-#g-head .search:hover{
-	cursor:  pointer;
+#g-head .m-head-nav .search:hover{
+	cursor: pointer;
 	background: url(../images/sprites.png) -20px -260px no-repeat;
 }
 #g-head .m-head-nav1,#g-head .m-head-nav2{
@@ -301,6 +297,9 @@ body{
 	line-height: 0;
 }
 #g-info ul{
+	display: table;
+	width: 1206px;
+	margin: 0 auto;
 	font-size: 0;
 }
 #g-info ul li{
@@ -604,7 +603,8 @@ body{
 	position: absolute;
 	bottom: 0;
 	right: 18px;
-	height: 20px;
+	height: 30px;
+	text-align: left;
 	font-size: 0;
 	line-height: 0;
 }
@@ -613,6 +613,7 @@ body{
 	width: 30px;
 	height: 20px;
 	line-height: 20px;
+	text-align: center;
 	background-color: #9dd8b1;
 }
 #m-content-ptbox .m-content-pb{
@@ -635,6 +636,8 @@ body{
 }
 .m-content-ptbox ul{
 	display: inline-block;
+	max-width: 900px;
+	height: 20px;
 	vertical-align: middle;
 }
 #m-content-ptbox .m-content-pt li{
@@ -876,3 +879,61 @@ body{
 	background: url(../images/sprites.png) 0 -280px;
 }
 /* /底部信息 */
+/* 响应式布局(IE8下不支持，兼容思路：将此处的变化调整到js里，采用监听window对象的resize事件，判断浏览器尺寸小于1205px时，分别调整以下节点的css样式) */
+@media screen and (max-width: 1205px){
+	body{
+		min-width: 960px;
+	}
+	#g-note .m-note{
+		width: 960px;
+	}
+	#g-head .m-header{
+		width: 960px;
+	}
+	#g-info ul{
+		width: 960px;
+	}
+	#g-info ul li{
+		width: 279px;
+		height: 200px;
+		margin: 60px auto 35px;
+	}
+	#g-info .m-info-content{
+		width: 170px;
+		height: 200px;
+	}
+	#g-info .m-info-l1{
+		margin-left: 0;
+	}
+	#g-info .m-info-l2{
+		margin-left: 60px;
+	}
+	#g-info .m-info-l3{
+		margin-left: 60px;
+	}
+	#g-content{
+		width: 960px;
+	}
+	#g-content .m-content{
+		width: 734px;
+	}
+	#m-content-kcul li{
+		margin: 0 17px 18px 0;
+	}
+	.m-content-ptbox ul{
+		max-width: 640px;
+	}
+	#g-foot .m-foot{
+		width: 960px;
+	}
+	#g-foot div h1{
+		left: 0;
+	}
+	#g-foot div p{
+		left: 0;
+	}
+	#g-foot table{
+		left: 543px;
+	}
+}
+/* /响应式布局 */
