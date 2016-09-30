@@ -60,6 +60,7 @@ body{
 #g-head .m-header div h1{
 	font: 22px/22px "Microsoft YaHei","微软雅黑";
 	color: #333;
+	vertical-align: text-bottom;
 }
 #g-head .m-header div h1 span{
 	width: 80px;
@@ -114,6 +115,7 @@ body{
 	background: url(../images/sprites.png) -20px -240px no-repeat;
 }
 #m-head-loginok span{
+	margin: 0 5px;
 	color: #ccc;
 }
 #m-head-loginok strong{
@@ -217,9 +219,10 @@ body{
 #g-head .m-head-nav ul{
 	font-size: 0;
 }
-#g-head .m-head-nav ul>li{
+#g-head .m-head-nav ul>li a{
 	height: 22px;
 	font: 16px/22px "Microsoft YaHei","微软雅黑";
+	color: #666;
 	vertical-align: text-bottom;
 }
 #g-head .m-head-nav ul li a:hover{
@@ -550,6 +553,7 @@ body{
 }
 #m-content-kcul .m-content-liMleave strong a{
 	display: inline-block;
+	color: #666;
 }
 #m-content-kcul .m-content-liMleave strong a:hover{
 	text-decoration: underline
@@ -837,7 +841,7 @@ body{
 	background: url(../images/sprites.png) 0 -330px no-repeat;
 }
 #g-foot div h1{
-	font: 22px/22px "Microsoft YaHei","微软雅黑"; 
+	font: 22px/22px "Microsoft YaHei","微软雅黑";
 	color: #39a030;
 }
 #g-foot table{
@@ -850,12 +854,12 @@ body{
 	vertical-align: super;
 }
 #g-foot table thead{
-	font: 12px/12px "Microsoft YaHei","微软雅黑"; 
+	font: 12px/12px "Microsoft YaHei","微软雅黑";
 	color: #bebfc0;
 }
 
 #g-foot table tbody tr a{
-	font: 14px/14px "Microsoft YaHei","微软雅黑"; 
+	font: 14px/14px "Microsoft YaHei","微软雅黑";
 	color: #bebfc0;
 }
 #g-foot table tbody tr a:hover{

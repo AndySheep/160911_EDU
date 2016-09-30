@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
     <title>网易教育产品部</title>
     <meta name="Keywords" content="网易教育产品部、网易、网易公开课、网易云课堂、中国大学MOOC、优质课程、智能问答、趣味实践、随心笔记、教育、计算机开发、交互视觉设计、视频教程、交流互动、免费、名师、实用、培训">
     <meta name="description" content="网易教育产品部结合网易公开课、网易云课堂以及中国大学MOOC向广大互联网学习爱好者提供一个优秀的学习平台">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="./stylesheets/reset.css">
     <link rel="stylesheet" type="text/css" href="./stylesheets/edu.css">
     <script type="text/javascript" src="./js/md5.js"></script>
@@ -29,8 +29,8 @@
         <div>
             <h1><span></span>网易教育产品部</h1>
             <em class="m-head-login" id="m-head-login"><span></span>关注</em>
-            <em class="m-head-loginok" id="m-head-loginok"><span class="m-loginok-log"></span>已关注 <span>|</span>&nbsp;<strong class="m-head-loginno" id="m-head-loginno">取消</strong></em>
-            <span class="m-head-fan">粉丝 45</span>
+            <em class="m-head-loginok" id="m-head-loginok"><span class="m-loginok-log"></span>已关注<span>|</span><strong class="m-head-loginno" id="m-head-loginno">取消</strong></em>
+            <span class="m-head-fan">粉丝&nbsp;45</span>
         </div>
         <!-- 头部导航 -->
         <div class="m-head-nav">
@@ -62,10 +62,10 @@
                 </div>
                 <div class="m-acpa">
                     <label for="m-password">密码</label>
-                    <input id="m-password" type="password" name="password">
+                    <input id="m-password" type="password" name="password" required>
                 </div>
                 <div>
-                    <button id="m-login-button" type="submit" required>登录</button>
+                    <button id="m-login-button" type="submit">登录</button>
                 </div>
             </fieldset>
         </form>
@@ -103,21 +103,24 @@
             <span class="m-info log1"></span>
             <div class="m-info-content">
                 <h1>网易公开课</h1>
-                <p>推出国内外名校公开课，涉及广泛的学科，名校老师认真讲解深度剖析，网易视频公开课频道搭建起强有力的网络视频教学平台。</p><a href="http://open.163.com/" target="_blank" rel="nofollow" title="网易公开课">了解更多&gt;</a>
+                <p>推出国内外名校公开课，涉及广泛的学科，名校老师认真讲解深度剖析，网易视频公开课频道搭建起强有力的网络视频教学平台。</p>
+                <a href="http://open.163.com/" target="_blank" rel="nofollow" title="网易公开课">了解更多&gt;</a>
             </div>
         </li>
         <li class="m-info-l2">
             <span class="m-info log2"></span>
             <div class="m-info-content">
                 <h1>云课堂</h1>
-                <p>网易旗下大型在线学习平台，该平台面向学习者提供海量免费、优质课程,创新的个性化学习体验，自由开放的交流互动环境。</p><a href="http://study.163.com/" target="_blank" rel="nofollow" title="云课堂">了解更多&gt;</a>
+                <p>网易旗下大型在线学习平台，该平台面向学习者提供海量免费、优质课程,创新的个性化学习体验，自由开放的交流互动环境。</p>
+                <a href="http://study.163.com/" target="_blank" rel="nofollow" title="云课堂">了解更多&gt;</a>
             </div>
         </li>
         <li class="m-info-l3">
             <span class="m-info log3"></span>
             <div class="m-info-content">
                 <h1>中国大学MOOC</h1>
-                <p>是爱课程网携手云课堂打造的在线学习平台，每一个有提升愿望的人,都可以在这里学习中国最好的大学课程，学完还能获得认证证书。</p><a href="http://www.icourse163.org/" target="_blank" rel="nofollow" title="中国大学MOOC">了解更多&gt;</a>
+                <p>是爱课程网携手云课堂打造的在线学习平台，每一个有提升愿望的人,都可以在这里学习中国最好的大学课程，学完还能获得认证证书。</p>
+                <a href="http://www.icourse163.org/" target="_blank" rel="nofollow" title="中国大学MOOC">了解更多&gt;</a>
             </div>
         </li>
     </ul>
@@ -162,6 +165,7 @@
                 <div id="m-content-videopop">
                     <h2>请观看下面的视频</h2>
                     <span id="m-content-videoclose"></span>
+                    <!-- 由于电脑屏幕较小，此处视频尺寸并未按照psd文件中的大小设置，便于测试 -->
                     <video id="m-content-videoplay" width=887 controls preload="auto">
                         <source src="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" type="video/mp4">
                     </video>
@@ -178,6 +182,7 @@
         </div>
     </div>
 </div>
+<!-- 清除浮动 -->
 <div class="clearfix"></div>
 <!-- /内容区 -->
 <!-- 底部信息 -->

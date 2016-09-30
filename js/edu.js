@@ -100,7 +100,7 @@ gEBId('m-login-button').onclick=function(){
 						}
 					});
 				}else{
-					alert('Ajax通信失败！');
+					alert('账号信息错误，请与管理员联系确认！');
 				}
 			});
 		}
@@ -130,7 +130,7 @@ var banner=gEBId('g-banner');
 //初始化一个nowbanner用于存储轮播状态
 var nowbanner=0;
 //监听按钮点击事件，点击后调用切换函数
-for (var i = 0, len=bannerBarLi.length; i < len; i++){
+for (var i=0,len=bannerBarLi.length;i<len;i++){
 	bannerBarLi[i].index=i;
 	bannerBarLi[i].onclick=function(){
 		nowbanner=this.index;
@@ -144,7 +144,6 @@ function bannerTab() {
 		bannerBarLi[i].className = '';
 	}
 	bannerBarLi[nowbanner].className = 'm-bar-active';
-
 	//控制bannerImgLi的className
 	for(var j=0,jlen=bannerImgLi.length;j<jlen;j++){
 		bannerImgLi[j].style.display='none';
@@ -282,6 +281,9 @@ for (var i=0,ilen=cHeadLi.length;i<ilen;i++){
 	cHeadLi[i].onclick=function(){
 		pTabNow=this.index;
 		var pageT=(pTabNow+1)*10;
+		var pSizeNow=(function(){
+			return document.documentElement.clientWidth<1205?15:20;
+		})();
 		KcAjax(1,pSizeNow,pageT);
 	};
 }
@@ -328,10 +330,11 @@ var video=gEBId('m-content-videopop');
 var playvideo=gEBId('m-content-videoplay');
 var popvideo=gEBId('m-content-videoimg');
 var closevideo=gEBId('m-content-videoclose');
-//监听首页视频图片点击事件，触发后弹出视频窗口和遮罩，点击空间上的播放按钮后即可播放，设置了预加载()
+//监听首页视频图片点击事件，触发后弹出视频窗口和遮罩，并播放视频
 addEvent(popvideo,'click',function(event){
 	show(mask);
 	show(video);
+	playvideo.play();
 });
 //监听视频窗口关闭按钮点击事件，触发后先暂停播放，然后关闭视频弹窗和遮罩
 addEvent(closevideo,'click',function(event){
