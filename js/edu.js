@@ -85,12 +85,12 @@ gEBId('m-login-button').onclick=function(){
 			//md5加密处理信息，调用Ajax的GET方法向服务器发送请求，若成功则退出登录弹窗，修改关注状态为已关注，设置相关cookie
 			var usernamemd5=hex_md5(String(inputac.value));
 			var passwordmd5=hex_md5(String(inputpa.value));
-			get('http://study.163.com/webDev/login.htm',{userName:usernamemd5,password:passwordmd5},function (a) {
+			get('//study.163.com/webDev/login.htm',{userName:usernamemd5,password:passwordmd5},function (a) {
 				if (a==='1') {
 					setCookie('loginSuc','yes');
 					close(loginshow);
 					close(mask);
-					get('http://study.163.com/webDev/ attention.htm','',function (b) {
+					get('//study.163.com/webDev/ attention.htm','',function (b) {
 						if (b==='1') {
 							setCookie('followSuc','yes');
 							close(login);
@@ -261,7 +261,7 @@ function KcAjax(pageN,pageS,pageT){
 		cHeadLi[i].className = '';
 	}
 	cHeadLi[pTabNow].className='m-content-act';
-	get('http://study.163.com/webDev/couresByCategory.htm',{pageNo:pageN,psize:pageS,type:pageT},function(data){
+	get('//study.163.com/webDev/couresByCategory.htm',{pageNo:pageN,psize:pageS,type:pageT},function(data){
 		var dataList=JSON.parse(data);
 		setKc(dataList,pageN);
 	});
@@ -377,7 +377,7 @@ function setHotline(arrHot){
 }
 //获取最热排行的Ajax数据并调用设置排行榜函数
 function hotAjax(){
-	get('http://study.163.com/webDev/hotcouresByCategory.htm','',function(hotData){
+	get('//study.163.com/webDev/hotcouresByCategory.htm','',function(hotData){
 		setHotline(JSON.parse(hotData));
 	});
 }
